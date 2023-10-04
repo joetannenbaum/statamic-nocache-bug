@@ -1,5 +1,7 @@
 # Statamic Nocache Bug Reproduction
 
+Relates to this issue: [https://github.com/statamic/cms/issues/8806](https://github.com/statamic/cms/issues/8806).
+
 If you use a `nocache` tag while `STATAMIC_STATIC_CACHING_STRATEGY=null` or while `STATAMIC_STATIC_CACHING_STRATEGY=half` and you are on an excluded page, your nocache session will add an entry with every page load.
 
 To reproduce:
