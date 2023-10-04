@@ -1,0 +1,56 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <span class="nocache" data-nocache="a637dbbcfbb826cbf1bfbc5eeb0745ab2421a02c"></span>
+    HOME! 19:06:49
+<script type="text/javascript">(function() {
+    var els = document.getElementsByClassName('nocache');
+    var map = {};
+    for (var i = 0; i < els.length; i++) {
+        var section = els[i].getAttribute('data-nocache');
+        map[section] = els[i];
+    }
+
+    fetch('/!/nocache', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            url: window.location.href,
+            sections: Object.keys(map)
+        })
+    })
+    .then((response) => response.json())
+    .then((data) => {
+        const regions = data.regions;
+        for (var key in regions) {
+            if (map[key]) map[key].outerHTML = regions[key];
+        }
+
+        for (const input of document.querySelectorAll('input[value="STATAMIC_CSRF_TOKEN"]')) {
+            input.value = data.csrf;
+        }
+
+        for (const meta of document.querySelectorAll('meta[content="STATAMIC_CSRF_TOKEN"]')) {
+            meta.content = data.csrf;
+        }
+
+        for (const input of document.querySelectorAll('script[data-csrf="STATAMIC_CSRF_TOKEN"]')) {
+            input.setAttribute('data-csrf', data.csrf);
+        }
+
+        if (window.hasOwnProperty('livewire_token')) {
+            window.livewire_token = data.csrf
+        }
+
+        if (window.hasOwnProperty('livewireScriptConfig')) {
+            window.livewireScriptConfig.csrf = data.csrf
+        }
+
+        document.dispatchEvent(new CustomEvent('statamic:nocache.replaced'));
+    });
+})();</script></body>
+</html>

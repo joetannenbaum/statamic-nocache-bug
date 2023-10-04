@@ -1,0 +1,21 @@
+LOGIN! {{ now | format:"H:i:s" }}
+
+{{ cache }}
+    <div style="margin-top: 20px;">This is cached. {{ now | format:"H:i:s" }}</div>
+
+    {{ nocache }}
+        <div style="margin-bottom: 20px;">This is not cached. {{ now | format:"H:i:s" }}</div>
+    {{ /nocache }}
+{{ /cache }}
+
+
+{{ cache }}
+    {{ array }}
+        {{ value }}
+        {{ example_count:value }}
+        {{ nocache }}
+            {{ value }}
+            {{ example_count:value }}
+        {{ /nocache }}
+    {{ /array }}
+{{ /cache }}
