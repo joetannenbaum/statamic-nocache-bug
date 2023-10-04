@@ -11,3 +11,5 @@ To reproduce:
 - Head to [http://localhost:8000](http://localhost:8000)
 
 Every time you refresh the page, another entry will be added to your cache (for me, locally, this happens in `storage/framework/cache/data/e7/75/e775231134737af1b63e5be9e1a61cfd10dbd691`).
+
+If you set `STATAMIC_STATIC_CACHING_STRATEGY=half`, you can still head to an excluded page ([http://localhost:8000/login](http://localhost:8000/login)) to reproduce the issue.
